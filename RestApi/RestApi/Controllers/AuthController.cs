@@ -24,6 +24,10 @@ namespace RestApi.Controllers
         [HttpPost("register")]
         public IActionResult Register(User user)
         {
+            if (ModelState.IsValid == false)
+            {
+                return BadRequest(ModelState);
+            }
             _context.Users.Add(user);
             _context.SaveChanges();
             return Ok(user);
