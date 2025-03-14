@@ -10,6 +10,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddControllers();
+/*
+builder.Services.AddCors( options => 
+{
+    options.AddPolicy("CorsPolicy", builder => 
+    {
+        builder.WithOrigins("http://localhost:3000")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials();
+    });
+}); 
+*/
 
 var key = Encoding.ASCII.GetBytes("aP3rF3ctlyS3cur3K3yF0rJWTt0k3n!aP3rF3ctlyS3cur3K3yF0rJWTt0k3n!");
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -35,6 +47,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
+app.UseMiddleware<GlobalMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
