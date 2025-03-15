@@ -13,6 +13,8 @@ public class GlobalMiddleware
         long time = DateTime.Now.Ticks;
         string ip = context.Connection.RemoteIpAddress.ToString();
         Console.WriteLine($"Request {path} from {ip} at {time}");
+        // aa.com -> mobile rest
+        // a1.com
         /*
         var userAgent = context.Request.Headers["User-Agent"].ToString().ToLower();
         if (userAgent.Contains("android") || userAgent.Contains("iphone") || userAgent.Contains("ipad"))
